@@ -9,20 +9,8 @@
   />
 </svelte:head>
 
-<div class="app">
-  <h1>Hello world</h1>
+<div
+  class="bg-gray-700 flex items-center justify-center h-screen w-screen"
+>
+  <h1 class="text-white text-lg">Hello world</h1>
 </div>
-
-<style>
-  .app {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    width: 100vw;
-  }
-
-  .app h1 {
-    color: red;
-  }
-</style>
