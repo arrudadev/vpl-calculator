@@ -4,7 +4,7 @@
 </script>
 
 <header class="bg-blue-gradient w-full">
-	<nav class="flex w-full max-w-screen-xl items-center justify-between px-8 py-4">
+	<nav class="m-auto flex w-full max-w-screen-xl items-center justify-between px-8 py-4">
 		<div class="flex items-center gap-2" data-testid="brand-wrapper">
 			<img src={logo} alt="Logo" class="h-8 w-8" data-testid="brand-logo" />
 

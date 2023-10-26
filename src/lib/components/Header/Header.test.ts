@@ -20,7 +20,7 @@ describe('Header Component', () => {
 		const element = document.querySelector('header nav');
 
 		expect(element?.getAttribute('class')).toBe(
-			'flex w-full max-w-screen-xl items-center justify-between px-8 py-4'
+			'm-auto flex w-full max-w-screen-xl items-center justify-between px-8 py-4'
 		);
 	});
 
