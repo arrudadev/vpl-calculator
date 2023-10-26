@@ -2,7 +2,21 @@
 	import finance from '$lib/images/finance.svg';
 </script>
 
-<section class="bg-blue-gradient flex w-full flex-col gap-8 px-8 py-8 sm:grid sm:grid-cols-2">
+<section class="bg-blue-gradient w-full py-8 sm:py-4">
+	<div
+		class="m-auto flex max-w-screen-md flex-col items-center justify-center gap-4 px-8 sm:flex-row"
+	>
+		<img src={finance} alt="Finanças" class="h-48 w-48" />
+
+		<div class="flex flex-col items-start">
+			<h1 class="text-blue-gradient text-3xl font-bold">Valor Presente Líquido</h1>
+
+			<p class="mt-2 text-black">Calcule a viabilidade financeira do seu investimento</p>
+		</div>
+	</div>
+</section>
+
+<!-- <section class="bg-blue-gradient flex w-full flex-col gap-8 px-8 py-8 sm:grid sm:grid-cols-2">
 	<div class="flex flex-col justify-center">
 		<h1 class="text-blue-gradient text-2xl font-bold">Valor Presente Liquido</h1>
 
@@ -22,4 +36,4 @@
 	<div class="flex items-center justify-center">
 		<img src={finance} alt="Finanças" class="h-64 w-64 md:h-96 md:w-96" />
 	</div>
-</section>
+</section> -->

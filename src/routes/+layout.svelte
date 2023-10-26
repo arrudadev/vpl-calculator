@@ -1,7 +1,5 @@
 <script>
 	import '../app.css';
-
-	import Header from '$lib/components/Header/Header.svelte';
 </script>
 
 <svelte:head>
@@ -11,8 +9,6 @@
 		content="O valor presente líquido, também conhecido como valor atual líquido ou método do valor atual, é a fórmula econômico-financeira capaz de determinar o valor presente de pagamentos futuros descontados a uma taxa de juros apropriada, menos o custo do investimento inicial."
 	/>
 </svelte:head>
-
-<Header />
 
 <slot />
 
