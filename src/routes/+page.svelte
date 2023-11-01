@@ -53,6 +53,32 @@
 
 	<section class="w-full">
 		<div class="flex w-full items-center justify-center bg-blue-500">
+			<h2 class="px-8 py-8 text-lg font-bold text-white">Investimento</h2>
+		</div>
+
+		<div
+			class="m-auto flex w-full max-w-screen-md flex-col items-center justify-center gap-2 bg-white px-8 py-8"
+		>
+			<h3 class="text-lg font-bold text-black">O que é Investimento?</h3>
+
+			<p class="text-center text-gray-600">
+				Em economia, em linhas gerais, investimento significa a aplicação de capital com a
+				expectativa de um benefício futuro. Ou seja, o valor que será aplicado em um negócio.
+			</p>
+
+			<p class="text-gray-600">Digite o valor do investimento:</p>
+
+			<input
+				type="number"
+				class="mx-8 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 outline-none focus:border-2 focus:border-blue-500 sm:w-80"
+				placeholder="Investimento"
+				required
+			/>
+		</div>
+	</section>
+
+	<section class="w-full">
+		<div class="flex w-full items-center justify-center bg-blue-500">
 			<h2 class="px-8 py-8 text-lg font-bold text-white">TIR (Taxa Interna de Retorno)</h2>
 		</div>
 
