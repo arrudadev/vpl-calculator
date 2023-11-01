@@ -1,9 +1,25 @@
-<script>
+<script lang="ts">
 	import logo from '$lib/images/logo.png';
 	import finance from '$lib/images/finance.svg';
 	import github from '$lib/icons/github.svg';
 	import plus from '$lib/icons/plus-solid.svg';
 	import close from '$lib/icons/close-solid.svg';
+
+	let cashFlows: number[] = [0];
+
+	const handleAddNewCashFlow = () => {
+		cashFlows = [...cashFlows, 0];
+	};
+
+	const handleChangeCashFlow = (event: Event, index: number) => {
+		const target = event.target as HTMLInputElement;
+
+		cashFlows.splice(index, 1, Number(target.value));
+	};
+
+	const handleRemoveCashFlow = (index: number) => {
+		cashFlows = cashFlows.filter((_, i) => i !== index);
+	};
 </script>
 
 <header class="bg-blue-gradient w-full">
@@ -54,7 +70,7 @@
 
 			<input
 				type="number"
-				class="mx-8 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 outline-none focus:border-2 focus:border-blue-500 md:w-72"
+				class="mx-8 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 outline-none focus:border-2 focus:border-blue-500 sm:w-80"
 				placeholder="TIR"
 				required
 			/>
@@ -78,53 +94,30 @@
 
 			<p class="text-gray-600">Digite o valor do fluxo de caixa de cada ano:</p>
 
-			<div class="flex gap-2">
-				<input
-					type="number"
-					class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 outline-none focus:border-2 focus:border-blue-500 md:w-72"
-					placeholder="Fluxo de caixa 1º ano"
-					required
-				/>
+			<!-- eslint-disable-next-line -->
+			{#each cashFlows as _, index}
+				<div class="flex w-full justify-center gap-2">
+					<input
+						type="number"
+						class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 outline-none focus:border-2 focus:border-blue-500 sm:w-72"
+						placeholder={`Fluxo de caixa ${index + 1}º ano`}
+						required
+						on:change={(event) => handleChangeCashFlow(event, index)}
+					/>
 
-				<button
-					class="flex items-center rounded-md border border-gray-300 bg-gray-50 px-3 py-2 hover:bg-gray-100 hover:shadow-md"
-				>
-					<img src={close} alt="close" class="h-4 w-4" />
-				</button>
-			</div>
-
-			<div class="flex gap-2">
-				<input
-					type="number"
-					class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 outline-none focus:border-2 focus:border-blue-500 md:w-72"
-					placeholder="Fluxo de caixa 2º ano"
-					required
-				/>
-
-				<button
-					class="flex items-center rounded-md border border-gray-300 bg-gray-50 px-3 py-2 hover:bg-gray-100 hover:shadow-md"
-				>
-					<img src={close} alt="close" class="h-4 w-4" />
-				</button>
-			</div>
-
-			<div class="flex gap-2">
-				<input
-					type="number"
-					class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 outline-none focus:border-2 focus:border-blue-500 md:w-72"
-					placeholder="Fluxo de caixa 3º ano"
-					required
-				/>
-
-				<button
-					class="flex items-center rounded-md border border-gray-300 bg-gray-50 px-3 py-2 hover:bg-gray-100 hover:shadow-md"
-				>
-					<img src={close} alt="close" class="h-4 w-4" />
-				</button>
-			</div>
+					<button
+						class="flex items-center rounded-md border border-gray-300 bg-gray-50 px-3 py-2 hover:bg-gray-100 hover:shadow-md"
+						on:click={() => handleRemoveCashFlow(index)}
+					>
+						<img src={close} alt="close" class="h-4 w-4" />
+					</button>
+				</div>
+			{/each}
 
 			<button
-				class="text-md flex items-center justify-center gap-2 rounded-md border border-gray-300 bg-gray-50 px-4 py-3 font-semibold hover:bg-gray-100 hover:shadow-md"
+				type="button"
+				class="text-md flex w-full items-center justify-center gap-2 rounded-md border border-gray-300 bg-gray-50 px-4 py-3 font-semibold hover:bg-gray-100 hover:shadow-md sm:w-40"
+				on:click={handleAddNewCashFlow}
 			>
 				<img src={plus} alt="plus" class="h-4 w-4" />
 
