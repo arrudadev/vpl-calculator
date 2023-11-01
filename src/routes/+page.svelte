@@ -6,6 +6,13 @@
 	import close from '$lib/icons/close-solid.svg';
 
 	let cashFlows: number[] = [0];
+	let investment: number;
+	let tir: number;
+	let vp = 0;
+	let vpl = 0;
+
+	$: investmentFeasibilityText = vpl > 0 ? 'viável' : 'inviável';
+	$: alreadyCalculatedVPL = vpl !== 0 && tir !== 0 && cashFlows.length > 1;
 
 	const handleAddNewCashFlow = () => {
 		cashFlows = [...cashFlows, 0];
@@ -19,6 +26,23 @@
 
 	const handleRemoveCashFlow = (index: number) => {
 		cashFlows = cashFlows.filter((_, i) => i !== index);
+	};
+
+	const roundInTwo = (value: number) => {
+		return Math.round((value + Number.EPSILON) * 100) / 100;
+	};
+
+	const handleCalculateVPL = () => {
+		const tax = 1 + tir / 100;
+
+		cashFlows.forEach((cashFlow, index) => {
+			const year = index + 1;
+			const yearTax = roundInTwo(Math.pow(tax, year));
+
+			vp += roundInTwo(cashFlow / yearTax);
+		});
+
+		vpl = roundInTwo(vp - investment);
 	};
 </script>
 
@@ -73,6 +97,7 @@
 				class="mx-8 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 outline-none focus:border-2 focus:border-blue-500 sm:w-80"
 				placeholder="Investimento"
 				required
+				bind:value={investment}
 			/>
 		</div>
 	</section>
@@ -99,6 +124,7 @@
 				class="mx-8 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 outline-none focus:border-2 focus:border-blue-500 sm:w-80"
 				placeholder="TIR"
 				required
+				bind:value={tir}
 			/>
 		</div>
 	</section>
@@ -170,15 +196,19 @@
 
 			<button
 				class="mt-8 w-full max-w-full rounded-full border border-[#0c66ee] bg-gradient-to-r from-[#468ef9] to-[#0c66ee] py-2 text-center text-base font-medium text-white opacity-90 transition duration-300 hover:opacity-100 sm:w-48"
+				on:click={handleCalculateVPL}
 			>
 				Calcular
 			</button>
 
-			<p class="font-bold text-gray-600">VPL: 123123</p>
+			{#if alreadyCalculatedVPL}
+				<p class="font-bold text-gray-600">VPL: {vpl}</p>
 
-			<p class="text-lg font-bold text-gray-700">
-				Como o VPL é positivo o investimento é <span class="text-blue-gradient">viável</span>
-			</p>
+				<p class="text-lg font-bold text-gray-700">
+					Como o VPL é positivo o investimento é
+					<span class="text-blue-gradient">{investmentFeasibilityText}</span>
+				</p>
+			{/if}
 		</div>
 	</section>
 </main>
